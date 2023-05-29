@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Pages/HomePage/HomePage.qml</file>
+        <file>Pages/LogicPage/LogicPage.qml</file>
+        <file>Pages/LoginPage/LoginPage.qml</file>
+        <file>Pages/RegisterationPage/RegisterationPage.qml</file>
+        <file>Pages/LandingPage/LandingPage.qml</file>
+        <file>Assets/LandingPage/background.png</file>
+        <file>Assets/Components/backBtn.png</file>
+        <file>Assets/Components/loginOptionPlaceholder.png</file>
+        <file>Assets/HomePage/profileIcon-Female.png</file>
+        <file>Assets/HomePage/profileIcon-Male.png</file>
+        <file>Assets/HomePage/signoutBtn.png</file>
+    </qresource>
+</RCC>
