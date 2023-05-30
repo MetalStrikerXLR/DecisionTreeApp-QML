@@ -26,7 +26,7 @@ Item {
         Label{
             text: "Login"
             font.family: "Urbanist"
-            font.pixelSize: 15
+            font.pixelSize: respAvg(15)
             font.weight: 30
             font.bold: true
             color: "white"
@@ -70,7 +70,7 @@ Item {
         Label{
             text: "Register"
             font.family: "Urbanist"
-            font.pixelSize: 15
+            font.pixelSize: respAvg(15)
             font.weight: 30
             font.bold: true
             color: "#1E232C"

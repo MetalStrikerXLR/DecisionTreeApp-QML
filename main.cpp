@@ -1,7 +1,13 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QScreen>
+#include <QDebug>
 #include "Modules/authhandler.h"
+
+#ifdef Q_OS_ANDROID
+#include <QtCore/private/qandroidextras_p.h>
+#endif
 
 int main(int argc, char *argv[])
 {

@@ -13,8 +13,8 @@ Item {
 
     Image {
         id: backbtn
-        width: respWidth(72)
-        height: respHeight(72)
+        width: respAvg(50)
+        height: respAvg(50)
         source: "qrc:/Assets/Components/backBtn.png"
         anchors{
             top: parent.top
@@ -39,10 +39,10 @@ Item {
         id: loginWelcome
         width: respWidth(280)
         height: respHeight(78)
-        text: "Lets Begin!\nEnter Details to SignUp"
+        text: "Lets Begin!\nSignUp Here"
         verticalAlignment: TextInput.AlignVCenter
         color: "#1E232C"
-        font.pixelSize: 30
+        font.pixelSize: respAvg(25)
         font.bold: true
         anchors{
             top: parent.top
@@ -245,7 +245,7 @@ Item {
         Label{
             text: "Agree and Register"
             font.family: "Urbanist"
-            font.pixelSize: 15
+            font.pixelSize: respAvg(15)
             font.weight: 30
             font.bold: true
             color: "white"
@@ -268,8 +268,31 @@ Item {
 
             onClicked: {
                 console.log("Registering")
+                loadingIcon.visible = true
                 authHandler.checkSignUpInfo(usernameInput.text, emailInput.text, passInput.text, passConfirmInput.text)
             }
+        }
+    }
+
+    Image {
+        id: loadingIcon
+        width: respAvg(40)
+        height: respAvg(40)
+        source: "qrc:/Assets/Components/loadingIcon.png"
+        visible: false
+        anchors{
+            bottom: registerBtn.top
+            horizontalCenter: registerBtn.horizontalCenter
+            bottomMargin: respHeight(15)
+        }
+
+        RotationAnimator {
+            target: loadingIcon;
+            from: 0;
+            to: 360;
+            loops: Animation.Infinite
+            duration: 2000
+            running: true
         }
     }
 
@@ -283,6 +306,7 @@ Item {
             }
             else {
                 console.log(info)
+                loadingIcon.visible = false
             }
         }
 
@@ -291,6 +315,7 @@ Item {
             emailInput.text = ""
             passInput.text = ""
             passConfirmInput.text = ""
+            loadingIcon.visible = false
             mainSwipeView.setCurrentIndex(3)
         }
     }

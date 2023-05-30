@@ -15,10 +15,10 @@ Item {
         id: loginWelcome
         width: respWidth(280)
         height: respHeight(78)
-        text: "Welcome back!\nEnter Details to Login"
+        text: "Welcome back!\nLets Login"
         verticalAlignment: TextInput.AlignVCenter
         color: "#1E232C"
-        font.pixelSize: 30
+        font.pixelSize: respAvg(25)
         font.bold: true
         anchors{
             top: parent.top
@@ -29,8 +29,8 @@ Item {
 
     Image {
         id: backbtn
-        width: respWidth(72)
-        height: respHeight(72)
+        width: respAvg(50)
+        height: respAvg(50)
         source: "qrc:/Assets/Components/backBtn.png"
         anchors{
             top: parent.top
@@ -154,7 +154,7 @@ Item {
         Label{
             text: "Login"
             font.family: "Urbanist"
-            font.pixelSize: 15
+            font.pixelSize: respAvg(15)
             font.weight: 30
             font.bold: true
             color: "white"
@@ -177,6 +177,7 @@ Item {
 
             onClicked: {
                 console.log("Loging In")
+                loadingIcon.visible = true
                 authHandler.checkSignInInfo(emailInput.text, passInput.text)
             }
         }
@@ -184,13 +185,35 @@ Item {
 
     Image {
         id: loginOptionsPH
-        width: respWidth(330)
-        height: respHeight(95)
+        width: respAvg(250)
+        height: respAvg(75)
         source: "qrc:/Assets/Components/loginOptionPlaceholder.png"
         anchors{
             top: parent.top
             horizontalCenter: parent.horizontalCenter
             topMargin: respHeight(583)
+        }
+    }
+
+    Image {
+        id: loadingIcon
+        width: respAvg(40)
+        height: respAvg(40)
+        source: "qrc:/Assets/Components/loadingIcon.png"
+        visible: false
+        anchors{
+            bottom: loginBtn.top
+            horizontalCenter: loginBtn.horizontalCenter
+            bottomMargin: respHeight(15)
+        }
+
+        RotationAnimator {
+            target: loadingIcon;
+            from: 0;
+            to: 360;
+            loops: Animation.Infinite
+            duration: 2000
+            running: true
         }
     }
 
@@ -204,12 +227,14 @@ Item {
             }
             else {
                 console.log(info)
+                loadingIcon.visible = false
             }
         }
 
         function onUserSignedIn() {
             emailInput.text = ""
             passInput.text = ""
+            loadingIcon.visible = false
             mainSwipeView.setCurrentIndex(3)
         }
     }

@@ -17,6 +17,7 @@ ApplicationWindow {
 
     property int baseWidth: 450
     property int baseHeight: 800
+    property real baseAvg: 917.88
 
     function respWidth(w) {
         return appRoot.width * (w/baseWidth);
@@ -24,6 +25,11 @@ ApplicationWindow {
 
     function respHeight(h) {
         return appRoot.height * (h/baseHeight);
+    }
+
+    function respAvg(a) {
+        var assetAvg = Math.sqrt(Math.pow(a, 2) + Math.pow(a, 2));
+        return Math.round(Math.sqrt(Math.pow(appRoot.height, 2) + Math.pow(appRoot.width, 2)) * (assetAvg / baseAvg));
     }
 
     // Create a swipe view for App Pages
@@ -37,7 +43,7 @@ ApplicationWindow {
             id: mainSwipeView
             currentIndex: 0
             anchors.fill: parent
-            interactive: false
+            interactive: true
 
             LandingPage{
                 id: landingPage

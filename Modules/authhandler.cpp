@@ -104,13 +104,13 @@ void AuthHandler::checkSignInInfo(const QString &emailAddress, const QString &pa
     QRegularExpressionMatch match = regex.match(emailAddress);
 
     if(emailAddress == "") {
-        emit userSignUpInfoChecked("Please Enter Email");
+        emit userSignInInfoChecked("Please Enter Email");
     }
     else if(match.hasMatch() == false) {
-        emit userSignUpInfoChecked("Please Enter valid Email");
+        emit userSignInInfoChecked("Please Enter valid Email");
     }
     else if(password == "") {
-        emit userSignUpInfoChecked("Please Enter Password");
+        emit userSignInInfoChecked("Please Enter Password");
     }
     else {
         emit userSignInInfoChecked("OK");

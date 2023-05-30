@@ -14,13 +14,14 @@ Item {
     Image {
         id: profileIcon
         source: "qrc:/Assets/HomePage/profileIcon-Male.png"
-        width: respWidth(250)
-        height: respHeight(250)
+        width: respAvg(170)
+        height: respAvg(170)
+
         visible: true
         anchors{
             top: parent.top
             horizontalCenter: parent.horizontalCenter
-            topMargin: respHeight(30)
+            topMargin: respHeight(25)
         }
     }
 
@@ -32,12 +33,12 @@ Item {
         verticalAlignment: TextInput.AlignVCenter
         horizontalAlignment: TextInput.AlignHCenter
         color: "white"
-        font.pixelSize: 30
+        font.pixelSize: respAvg(25)
         font.bold: true
         anchors{
-            top: parent.top
+            top: profileIcon.bottom
             horizontalCenter: parent.horizontalCenter
-            topMargin: respHeight(280)
+            topMargin: respHeight(5)
         }
     }
 
@@ -56,7 +57,7 @@ Item {
         Label{
             text: "Start"
             font.family: "Urbanist"
-            font.pixelSize: 15
+            font.pixelSize: respAvg(15)
             font.weight: 30
             font.bold: true
             color: "white"
@@ -83,12 +84,25 @@ Item {
     Image {
         id: signoutBtn
         source: "qrc:/Assets/HomePage/signoutBtn.png"
-        width: respWidth(75)
-        height: respHeight(75)
+        width: respAvg(50)
+        height: respAvg(50)
         anchors{
             top: startBtn.bottom
             horizontalCenter: parent.horizontalCenter
             topMargin: respHeight(80)
+        }
+
+        Label {
+            id: signoutLabel
+            text: "Sign Out"
+            color: "#1E232C"
+            font.bold: true
+            font.pixelSize: respAvg(10)
+            anchors {
+                top: parent.bottom
+                horizontalCenter: parent.horizontalCenter
+                topMargin: respHeight(5)
+            }
         }
 
         MouseArea {

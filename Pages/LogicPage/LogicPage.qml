@@ -15,7 +15,6 @@ Item {
         color: "#F5F5F5"
     }
 
-
     Label {
         id: q1
         width: respWidth(280)
@@ -23,7 +22,7 @@ Item {
         text: "Participant with disabilities?"
         verticalAlignment: TextInput.AlignVCenter
         color: "#1E232C"
-        font.pixelSize: 20
+        font.pixelSize: respAvg(20)
         font.bold: true
         anchors{
             top: parent.top
