@@ -13,5 +13,7 @@
         <file>Assets/HomePage/profileIcon-Male.png</file>
         <file>Assets/HomePage/signoutBtn.png</file>
         <file>Assets/Components/loadingIcon.png</file>
+        <file>Assets/LogicPage/decisionCard.png</file>
+        <file>Assets/LogicPage/backBtn.png</file>
     </qresource>
 </RCC>

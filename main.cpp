@@ -1,9 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QScreen>
-#include <QDebug>
 #include "Modules/authhandler.h"
+#include "Modules/decisionhandler.h"
 
 #ifdef Q_OS_ANDROID
 #include <QtCore/private/qandroidextras_p.h>
@@ -26,10 +25,13 @@ int main(int argc, char *argv[])
     //****************************************************************/
 
     AuthHandler *authHandler = new AuthHandler();
+    DecisionHandler *decisionHandler = new DecisionHandler();
+
     authHandler->setAPIKey("AIzaSyBtZpxwevk9KN3MZhW8HrCX8JUrke7Ro9U");
-    authHandler->setDatabaseURL("https://qtappfirebasetest-default-rtdb.asia-southeast1.firebasedatabase.app/");
+    authHandler->setDatabaseURL("https://qtappfirebasetest-default-rtdb.asia-southeast1.firebasedatabase.app/");    
 
     engine.rootContext()->setContextProperty("authHandler", authHandler);
+    engine.rootContext()->setContextProperty("decisionHandler", decisionHandler);
 
     //****************************************************************/
     // Load QML main page

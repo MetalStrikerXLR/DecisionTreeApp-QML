@@ -8,9 +8,11 @@ AuthHandler::AuthHandler(QObject *parent)
     : QObject(parent)
     , m_apiKey( QString() )
 {
+    // Define Endpoint URLs
     m_signUpEndpoint = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=";
     m_signInEndpoint = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
 
+    // Initialize NetworkManager to communicate with firebase
     m_networkAccessManager = new QNetworkAccessManager(this);
 }
 
@@ -19,9 +21,41 @@ AuthHandler::~AuthHandler()
     m_networkAccessManager->deleteLater();
 }
 
+QString AuthHandler::getActiveUserName()
+{
+    return m_activeUserName;
+}
+
+void AuthHandler::setActiveUserName(QString userName)
+{
+    m_activeUserName = userName;
+    emit activeUserNameChanged();
+}
+
+QString AuthHandler::getActiveUserEmail()
+{
+    return m_activeUserEmail;
+}
+
+void AuthHandler::setActiveUserEmail(QString userEmail)
+{
+    m_activeUserEmail = userEmail;
+    emit activeUserNameChanged();
+}
+
+QString AuthHandler::getAPIKey()
+{
+    return m_apiKey;
+}
+
 void AuthHandler::setAPIKey(const QString &apiKey)
 {
     m_apiKey = apiKey;
+}
+
+QString AuthHandler::getDatabaseURL()
+{
+    return m_databaseURL;
 }
 
 void AuthHandler::setDatabaseURL(const QString &databaseURL)
@@ -115,28 +149,6 @@ void AuthHandler::checkSignInInfo(const QString &emailAddress, const QString &pa
     else {
         emit userSignInInfoChecked("OK");
     }
-}
-
-QString AuthHandler::getActiveUserName()
-{
-    return m_activeUserName;
-}
-
-void AuthHandler::setActiveUserName(QString userName)
-{
-    m_activeUserName = userName;
-    emit activeUserNameChanged();
-}
-
-QString AuthHandler::getActiveUserEmail()
-{
-    return m_activeUserEmail;
-}
-
-void AuthHandler::setActiveUserEmail(QString userEmail)
-{
-    m_activeUserEmail = userEmail;
-    emit activeUserNameChanged();
 }
 
 void AuthHandler::performPOST(const QString &url, const QJsonDocument &payload)

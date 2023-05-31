@@ -29,7 +29,10 @@ public:
     QString getActiveUserEmail();
     void setActiveUserEmail(QString userEmail);
 
+    QString getAPIKey();
     void setAPIKey(const QString &apiKey);
+
+    QString getDatabaseURL();
     void setDatabaseURL(const QString &databaseURL);
 
 public slots:

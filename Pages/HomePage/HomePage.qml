@@ -69,7 +69,12 @@ Item {
 
         MouseArea{
             anchors.fill: parent
-            onClicked: mainSwipeView.setCurrentIndex(4)
+            onClicked: {
+                mainSwipeView.setCurrentIndex(4)
+                logicPage.logicTimer.running = true
+                logicPage.logModel.append({ logText: "00:00 -> Evaluation Started" })
+                logicPage.logListView.positionViewAtEnd()
+            }
 
             onPressed: {
                 parent.color = "#344667"
