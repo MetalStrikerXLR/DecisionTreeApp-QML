@@ -72,14 +72,6 @@ ApplicationWindow {
         }
     }
 
-    onWidthChanged: {
-        console.log("Width: " + appRoot.width);
-    }
-
-    onHeightChanged: {
-        console.log("Height: " + appRoot.height);
-    }
-
     onClosing: {
         console.log("Exiting QML...")
     }

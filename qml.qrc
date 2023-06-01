@@ -15,5 +15,6 @@
         <file>Assets/Components/loadingIcon.png</file>
         <file>Assets/LogicPage/decisionCard.png</file>
         <file>Assets/LogicPage/backBtn.png</file>
+        <file>Pages/Components/DecisionCard.qml</file>
     </qresource>
 </RCC>
