@@ -14,6 +14,67 @@ Item {
     property string currentDate: ""
     property string stopwatchTime: "00:00"
 
+    property var cardComp: [cardA, cardB, cardC]
+    property int cardIndex: 0
+
+    function prepareNextCard(ans) {
+        // Generate Index
+        cardIndex = (cardIndex + 1) % 3
+
+        // Update Card Info
+        var nextQuestion
+        var nextQuestionInfo
+
+        if(cardIndex == 0) {
+            nextQuestion = decisionHandler.getNextQuestion(cardInfoB.question, ans)
+            nextQuestionInfo = decisionHandler.getQuestionInfo(nextQuestion)
+            cardInfoA.question = nextQuestion
+            cardInfoA.nextQuestionA = nextQuestionInfo[0]
+            cardInfoA.nextQuestionB = nextQuestionInfo[1]
+        }
+        else {
+            nextQuestion = decisionHandler.getNextQuestion(cardInfoA.question, ans)
+            nextQuestionInfo = decisionHandler.getQuestionInfo(nextQuestion)
+            cardInfoB.question = nextQuestion
+            cardInfoB.nextQuestionA = nextQuestionInfo[0]
+            cardInfoB.nextQuestionB = nextQuestionInfo[1]
+        }
+
+        // Update Card to stack
+        decisionStack.moveItem(0,2)
+        decisionStack.incrementCurrentIndex()
+    }
+
+    function preparePrevCard() {
+        // Generate Index
+        cardIndex = (cardIndex - 1) % 2
+        if(cardIndex == -1) {
+            cardIndex = 1;
+        }
+
+        // Update Card Info
+        var prevQuestion
+        var prevQuestionInfo
+
+        if(cardIndex == 0) {
+            prevQuestion = decisionHandler.getNextQuestion(cardInfoB.question, ans)
+            prevQuestionInfo = decisionHandler.getQuestionInfo(nextQuestion)
+            cardInfoA.question = prevQuestion
+            cardInfoA.nextQuestionA = nextQuestionInfo[0]
+            cardInfoA.nextQuestionB = nextQuestionInfo[1]
+        }
+        else {
+            prevQuestion = decisionHandler.getNextQuestion(cardInfoA.question, ans)
+            prevQuestionInfo = decisionHandler.getQuestionInfo(nextQuestion)
+            cardInfoB.question = prevQuestion
+            cardInfoB.nextQuestionA = prevQuestionInfo[0]
+            cardInfoB.nextQuestionB = prevQuestionInfo[1]
+        }
+
+        // Update Card to stack
+        decisionStack.setCurrentIndex(cardIndex)
+    }
+
     Rectangle {
         id: background
         anchors.fill: parent
@@ -64,91 +125,90 @@ Item {
         }
     }
 
-    Button {
-        onClicked: {
-            decisionStack.replace(prevCard)
-        }
-    }
-
-    StackView {
+    SwipeView {
         id: decisionStack
         width: respAvg(320)
         height: respAvg(400)
-        initialItem: activeCard
+        currentIndex: 1
+        clip: true
         anchors {
             top: logBox.bottom
             horizontalCenter: parent.horizontalCenter
             topMargin: respAvg(5)
         }
-    }
 
-    Component {
-        id: activeCard
-        DecisionCard {
+        Item {
             id: cardA
-            question: "Participant with disabilities?"
-            nextQuestionA: "Hearing?"
-            nextQuestionB: "Cognitive?"
+            DecisionCard {
+                id: cardInfoA
+                question: "Card A"
+                nextQuestionA: ""
+                nextQuestionB: ""
 
-            yesBtnArea.onClicked: {
-                var time = stopwatchTime
-                logModel.append({ logText: time + "->" + cardA.question + " Yes" })
-                logListView.positionViewAtEnd()
-            }
+                yesBtnArea.onClicked: {
+                    var time = stopwatchTime
+                    logModel.append({ logText: time + "->" + cardInfoA.question + " Yes" })
+                    logListView.positionViewAtEnd()
+                    prepareNextCard("yes")
+                }
 
-            noBtnArea.onClicked: {
-                var time = stopwatchTime
-                logModel.append({ logText: time + "->" + cardA.question + " No" })
-                logListView.positionViewAtEnd()
+                noBtnArea.onClicked: {
+                    var time = stopwatchTime
+                    logModel.append({ logText: time + "->" + cardInfoA.question + " No" })
+                    logListView.positionViewAtEnd()
+                    prepareNextCard("no")
+                }
             }
         }
-    }
 
-    Component {
-        id: prevCard
-        DecisionCard {
+        Item {
             id: cardB
-            question: "Cognitive?"
-            nextQuestionA: ""
-            nextQuestionB: ""
+            DecisionCard {
+                id: cardInfoB
+                question: "Card B"
+                nextQuestionA: ""
+                nextQuestionB: ""
 
-            yesBtnArea.onClicked: {
-                var time = stopwatchTime
-                logModel.append({ logText: time + "->" + cardB.question + " Yes" })
-                logListView.positionViewAtEnd()
-            }
+                yesBtnArea.onClicked: {
+                    var time = stopwatchTime
+                    logModel.append({ logText: time + "->" + cardInfoB.question + " Yes" })
+                    logListView.positionViewAtEnd()
+                    prepareNextCard("yes")
+                }
 
-            noBtnArea.onClicked: {
-                var time = stopwatchTime
-                logModel.append({ logText: time + "->" + cardB.question + " No" })
-                logListView.positionViewAtEnd()
+                noBtnArea.onClicked: {
+                    var time = stopwatchTime
+                    logModel.append({ logText: time + "->" + cardInfoB.question + " No" })
+                    logListView.positionViewAtEnd()
+                    prepareNextCard("no")
+                }
             }
         }
-    }
 
-    Component {
-        id: nextCard
-        DecisionCard {
+        Item {
             id: cardC
-            question: "Hearing?"
-            nextQuestionA: ""
-            nextQuestionB: ""
+            DecisionCard {
+                id: cardInfoC
+                question: "Card C"
+                nextQuestionA: ""
+                nextQuestionB: ""
 
-            yesBtnArea.onClicked: {
-                var time = stopwatchTime
-                logModel.append({ logText: time + "->" + cardC.question + " Yes" })
-                logListView.positionViewAtEnd()
-            }
+                yesBtnArea.onClicked: {
+                    var time = stopwatchTime
+                    logModel.append({ logText: time + "->" + cardInfoC.question + " Yes" })
+                    logListView.positionViewAtEnd()
+                    prepareNextCard("yes")
+                }
 
-            noBtnArea.onClicked: {
-                var time = stopwatchTime
-                logModel.append({ logText: time + "->" + cardC.question + " No" })
-                logListView.positionViewAtEnd()
+                noBtnArea.onClicked: {
+                    var time = stopwatchTime
+                    logModel.append({ logText: time + "->" + cardInfoC.question + " No" })
+                    logListView.positionViewAtEnd()
+                    prepareNextCard("no")
+                }
             }
         }
     }
-
-
     Button {
         id: prevQuestionBtn
         text: "Prev Question"
@@ -158,6 +218,10 @@ Item {
             bottom: decisionStack.bottom
             horizontalCenter: decisionStack.horizontalCenter
             bottomMargin: respHeight(30)
+        }
+
+        onClicked: {
+            preparePrevCard()
         }
     }
 
@@ -217,4 +281,11 @@ Item {
         }
     }
 
+    Component.onCompleted: {
+        var startQuestion = decisionHandler.getStartQuestion()
+        var startQuestionInfo = decisionHandler.getQuestionInfo(startQuestion)
+        cardInfoA.question = startQuestion
+        cardInfoA.nextQuestionA = startQuestionInfo[0]
+        cardInfoA.nextQuestionB = startQuestionInfo[1]
+    }
 }
