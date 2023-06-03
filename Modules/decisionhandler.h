@@ -30,6 +30,7 @@ public:
 
     Q_INVOKABLE QList<QStringList> getLogs();
     Q_INVOKABLE void setLogs(QString logEntry);
+    Q_INVOKABLE void clearLogs();
 
     Q_INVOKABLE QString getCompletionTime();
     Q_INVOKABLE void setCompletionTime(QString time);

@@ -462,6 +462,7 @@ Item {
                     logicTimerA.totalSec = 0
 
                     decisionHandler.clearResult();
+                    decisionHandler.clearLogs();
                     decisionHandler.clearUserChoice();
 
                     prevBtn.visible = false

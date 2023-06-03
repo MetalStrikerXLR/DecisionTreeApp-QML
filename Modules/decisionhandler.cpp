@@ -118,6 +118,11 @@ void DecisionHandler::setLogs(QString logEntry)
     m_logs.append(parsedLog);
 }
 
+void DecisionHandler::clearLogs()
+{
+    m_logs.clear();
+}
+
 QString DecisionHandler::getCompletionTime()
 {
     return m_completionTime;
