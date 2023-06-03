@@ -203,7 +203,7 @@ void AuthHandler::networkReplyReadyRead()
 
 void AuthHandler::parseResponse(const QByteArray &response)
 {
-    qDebug() << response;
+//    qDebug() << response;
     QJsonDocument jsonDocument = QJsonDocument::fromJson(response);
 
     if (jsonDocument.object().contains("error")) {
@@ -229,7 +229,7 @@ void AuthHandler::parseResponse(const QByteArray &response)
         }
     }
     else {
-        qDebug() << "The response was: " << response;
+//        qDebug() << "The response was: " << response;
         if(m_signingUpState) {
             m_signingUpState = false;
             emit userSignedUp();

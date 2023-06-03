@@ -23,8 +23,8 @@ FirebaseUploader::~FirebaseUploader()
 
 void FirebaseUploader::uploadData()
 {
-    deleteLogs();
-    deleteResult();
+//    deleteLogs();
+//    deleteResult();
 
     QString completionTime = m_decisionHandler->getCompletionTime();
     QList<QStringList> logs = m_decisionHandler->getLogs();
@@ -105,7 +105,7 @@ void FirebaseUploader::networkReplyReadyRead()
 
 void FirebaseUploader::parseResponse(const QByteArray &response)
 {
-    qDebug() << "Parse:" << response;
+//    qDebug() << "Parse:" << response;
     QJsonDocument jsonDocument = QJsonDocument::fromJson(response);
 
     if (jsonDocument.object().contains("error")) {
