@@ -20,6 +20,7 @@ public:
     Q_INVOKABLE void signUserUp(const QString &userName, const QString &emailAddress, const QString &password);
     Q_INVOKABLE void signUserIn(const QString &emailAddress, const QString &password);
     Q_INVOKABLE void signUserOut();
+    Q_INVOKABLE QString getUserToken();
     Q_INVOKABLE void checkSignUpInfo(const QString &userName,const QString &emailAddress, const QString &password, const QString &confirmPassword);
     Q_INVOKABLE void checkSignInInfo(const QString &emailAddress, const QString &password);
 

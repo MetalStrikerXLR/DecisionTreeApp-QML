@@ -63,12 +63,17 @@ void AuthHandler::setDatabaseURL(const QString &databaseURL)
     m_databaseURL = databaseURL;
 }
 
+QString AuthHandler::getUserToken()
+{
+    return m_idToken;
+}
+
 void AuthHandler::signUserUp(const QString &userName, const QString &emailAddress, const QString &password)
 {
     m_signingUpState = true;
     setActiveUserName(userName);
     setActiveUserEmail(emailAddress);
-    qDebug() << emailAddress;
+
     QString signUpEndpointAPI = m_signUpEndpoint + m_apiKey;
 
     QVariantMap credentialPayload;
@@ -155,7 +160,8 @@ void AuthHandler::performPOST(const QString &url, const QJsonDocument &payload)
 {
     QNetworkRequest newRequest((QUrl(url)));
     newRequest.setHeader( QNetworkRequest::ContentTypeHeader, QString( "application/json"));
-    m_networkReply = m_networkAccessManager->post( newRequest, payload.toJson());
+    //    m_networkReply = m_networkAccessManager->post( newRequest, payload.toJson());
+    m_networkReply = m_networkAccessManager->sendCustomRequest(newRequest,"POST", payload.toJson());
     connect(m_networkReply, &QNetworkReply::readyRead, this, &AuthHandler::networkReplyReadyRead);
 }
 
@@ -183,7 +189,7 @@ void AuthHandler::createUserDatabaseEntry()
 
     QNetworkRequest newUserEntryRequest((QUrl(endPoint)));
     newUserEntryRequest.setHeader( QNetworkRequest::ContentTypeHeader, QString( "application/json"));
-    m_networkReply = m_networkAccessManager->put(newUserEntryRequest, jsonDoc.toJson());
+    m_networkReply = m_networkAccessManager->sendCustomRequest(newUserEntryRequest,"PUT", jsonDoc.toJson());
     connect(m_networkReply, &QNetworkReply::readyRead, this, &AuthHandler::networkReplyReadyRead);
 }
 

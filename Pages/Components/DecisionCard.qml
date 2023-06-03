@@ -8,7 +8,9 @@ Item {
     property string nextQuestionA: "Next A?"
     property string nextQuestionB: "Next B?"
 
+    property alias yesBtn: yesBtn
     property alias yesBtnArea: yesBtnMouseArea
+    property alias noBtn: noBtn
     property alias noBtnArea: noBtnMouseArea
 
     Rectangle {
@@ -119,7 +121,7 @@ Item {
         // Next Question A
         Label {
             id: nextQuesA
-            width: parent.width * 0.4
+            width: parent.width * 0.3
             height: respHeight(78)
             text: nextQuestionA
             verticalAlignment: TextInput.AlignVCenter
@@ -139,7 +141,7 @@ Item {
         // Next Question B
         Label {
             id: nextQuesB
-            width: parent.width * 0.4
+            width: parent.width * 0.3
             height: respHeight(78)
             text: nextQuestionB
             verticalAlignment: TextInput.AlignVCenter

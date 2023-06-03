@@ -16,5 +16,6 @@
         <file>Assets/LogicPage/decisionCard.png</file>
         <file>Assets/LogicPage/backBtn.png</file>
         <file>Pages/Components/DecisionCard.qml</file>
+        <file>Assets/LogicPage/submitBtn.png</file>
     </qresource>
 </RCC>

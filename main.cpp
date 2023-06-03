@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include "Modules/authhandler.h"
 #include "Modules/decisionhandler.h"
+#include "Modules/firebaseuploader.h"
 
 #ifdef Q_OS_ANDROID
 #include <QtCore/private/qandroidextras_p.h>
@@ -24,14 +25,17 @@ int main(int argc, char *argv[])
     // Initialize and expose backend modules here
     //****************************************************************/
 
+    // Enter you Firebase API key and Firebase Realtime Database URL here.
     AuthHandler *authHandler = new AuthHandler();
-    DecisionHandler *decisionHandler = new DecisionHandler();
-
     authHandler->setAPIKey("AIzaSyBtZpxwevk9KN3MZhW8HrCX8JUrke7Ro9U");
-    authHandler->setDatabaseURL("https://qtappfirebasetest-default-rtdb.asia-southeast1.firebasedatabase.app/");    
-
+    authHandler->setDatabaseURL("https://qtappfirebasetest-default-rtdb.asia-southeast1.firebasedatabase.app/");
     engine.rootContext()->setContextProperty("authHandler", authHandler);
+
+    DecisionHandler *decisionHandler = new DecisionHandler();
     engine.rootContext()->setContextProperty("decisionHandler", decisionHandler);
+
+    FirebaseUploader *firebaseUploader = new FirebaseUploader(authHandler, decisionHandler);
+    engine.rootContext()->setContextProperty("firebaseUploader", firebaseUploader);
 
     //****************************************************************/
     // Load QML main page

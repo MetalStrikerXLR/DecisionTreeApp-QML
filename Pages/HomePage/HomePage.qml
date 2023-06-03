@@ -55,7 +55,7 @@ Item {
         }
 
         Label{
-            text: "Start"
+            text: "Go to Evaluation"
             font.family: "Urbanist"
             font.pixelSize: respAvg(15)
             font.weight: 30
@@ -70,10 +70,8 @@ Item {
         MouseArea{
             anchors.fill: parent
             onClicked: {
+                logicPage.loadStartQuestion()
                 mainSwipeView.setCurrentIndex(4)
-                logicPage.logicTimer.running = true
-                logicPage.logModel.append({ logText: "00:00 -> Evaluation Started" })
-                logicPage.logListView.positionViewAtEnd()
             }
 
             onPressed: {

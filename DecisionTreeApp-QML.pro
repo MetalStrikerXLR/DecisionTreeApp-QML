@@ -6,11 +6,13 @@ QT += core-private quick network
 
 HEADERS += \
     Modules/authhandler.h \
-    Modules/decisionhandler.h
+    Modules/decisionhandler.h \
+    Modules/firebaseuploader.h
 
 SOURCES += \
-    Modules/decisionhandler.cpp \
     main.cpp \
+    Modules/decisionhandler.cpp \
+    Modules/firebaseuploader.cpp \
     Modules/authhandler.cpp \
 
 RESOURCES += qml.qrc
