@@ -27,8 +27,8 @@ int main(int argc, char *argv[])
 
     // Enter you Firebase API key and Firebase Realtime Database URL here.
     AuthHandler *authHandler = new AuthHandler();
-    authHandler->setAPIKey("AIzaSyBtZpxwevk9KN3MZhW8HrCX8JUrke7Ro9U");
-    authHandler->setDatabaseURL("https://qtappfirebasetest-default-rtdb.asia-southeast1.firebasedatabase.app/");
+    authHandler->setAPIKey("<API Key Here>");
+    authHandler->setDatabaseURL("<Database URL>");
     engine.rootContext()->setContextProperty("authHandler", authHandler);
 
     DecisionHandler *decisionHandler = new DecisionHandler();
